@@ -6,4 +6,16 @@
     <string name="findWhatYouNeed">Find What You Need</string>
     <string name="shareYourExperience">Share Your Experience</string>
     <string name="searchPageMainText">Downtown Terre Haute Search Page</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="searchMainText">Downtown Terre Haute Search Page</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="museums_button">museums</string>
+    <string name="shops_button">shops</string>
+    <string name="bars_button">bars</string>
+    <string name="calendar_of_events_text">Downtown Terre Haute Calendar of Events</string>
+    <string name="title_activity_event_information">EventInformationActivity</string>
+    <string name="eventInformationMainText">Event Information</string>
+    <string name="nameText">Name:</string>
+    <string name="event_information_main_text">Event Information</string>
 </resources>
