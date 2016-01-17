@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">DowntownTerreHaute</string>
     <string name="action_settings">Settings</string>
+    <string name="mainScreenTitle">Welcome to Downtown Terre Haute</string>
+    <string name="viewCalendarOfEvents">View Calendar of Events</string>
+    <string name="findWhatYouNeed">Find What You Need</string>
+    <string name="shareYourExperience">Share Your Experience</string>
+    <string name="searchPageMainText">Downtown Terre Haute Search Page</string>
 </resources>

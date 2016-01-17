@@ -15,5 +15,40 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="@string/mainScreenTitle"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="34dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:id="@+id/textView" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="85dp"
+        android:text="@string/viewCalendarOfEvents"
+        android:id="@+id/calendar_of_events_button"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="85dp"
+        android:text="@string/findWhatYouNeed"
+        android:id="@+id/search_button"
+        android:layout_below="@+id/calendar_of_events_button"
+        android:layout_alignLeft="@+id/calendar_of_events_button"
+        android:layout_alignStart="@+id/calendar_of_events_button"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="85dp"
+        android:text="@string/shareYourExperience"
+        android:id="@+id/share_button"
+        android:layout_below="@+id/search_button"
+        android:layout_alignLeft="@+id/search_button"
+        android:layout_alignStart="@+id/search_button"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
