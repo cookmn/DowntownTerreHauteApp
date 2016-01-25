@@ -18,4 +18,8 @@
     <string name="eventInformationMainText">Event Information</string>
     <string name="nameText">Name:</string>
     <string name="event_information_main_text">Event Information</string>
+    <string name="title_activity_social">SocialActivity</string>
+    <string name="socialPage">Downtown Terre Haute Social Media Page</string>
+    <string name="postStatus">Post a status</string>
+    <string name="title_activity_calender_list_tab_host">CalenderListTabHost</string>
 </resources>

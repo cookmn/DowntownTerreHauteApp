@@ -11,12 +11,22 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SearchActivity"
             android:label="@string/title_activity_search"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.rose_hulman.cookmn.downtownterrehaute.MainActivity" />
+        </activity>
         <activity
             android:name=".CalendarActivity"
             android:label="@string/title_activity_calendar"
@@ -25,8 +35,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.rose_hulman.cookmn.downtownterrehaute.MainActivity" />
-
-
         </activity>
         <activity
             android:name=".EventInformationActivity"
@@ -36,11 +44,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.rose_hulman.cookmn.downtownterrehaute.CalendarActivity" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SocialActivity"
+            android:label="@string/title_activity_social"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.rose_hulman.cookmn.downtownterrehaute.MainActivity" />
         </activity>
     </application>
 

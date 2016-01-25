@@ -9,25 +9,32 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="edu.rose_hulman.cookmn.downtownterrehaute.CalendarActivity"
-    tools:showIn="@layout/activity_calendar">
+    tools:context="edu.rose_hulman.cookmn.downtownterrehaute.SocialActivity"
+    tools:showIn="@layout/activity_social">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/calendar_of_events_text"
+        android:text="@string/socialPage"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:textSize="34dp"
         android:layout_marginTop="10dp"
         android:textAlignment="center"
         android:id="@+id/textView" />
-
-    <CalendarView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/calendarView"
-        android:layout_centerVertical="true"
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:text="@string/postStatus"
+        android:id="@+id/status_post_button"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/textView"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/status_post_button">
+
+    </android.support.v7.widget.RecyclerView>
+
+
 </RelativeLayout>
