@@ -1,0 +1,39 @@
+type Key extends String;
+type UserID extends String;
+
+type Establishment {
+	name: String,
+	hours: String,
+	location: String,
+	description: String,
+	logo: String,
+	type: String
+}
+
+type Event {
+	name: String,
+	date: Number,
+	time: String,
+	location: String,
+	description: String,
+	logo: String
+}
+
+type Status {
+	text: String,
+	user: UserID
+	numLikes: Number,
+	flagged: Number
+}
+
+path /establishments/{establishment} is Establishment;
+path /events/{event} is Event;
+path /statuses/{status} is Status;
+
+path / {
+	read() { auth != null; }
+	write() { auth != null; }
+}
+
+
+
