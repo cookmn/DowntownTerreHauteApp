@@ -22,4 +22,5 @@
     <string name="socialPage">Downtown Terre Haute Social Media Page</string>
     <string name="postStatus">Post a status</string>
     <string name="title_activity_calender_list_tab_host">CalenderListTabHost</string>
+    <string name="post_a_status">Post a status</string>
 </resources>
