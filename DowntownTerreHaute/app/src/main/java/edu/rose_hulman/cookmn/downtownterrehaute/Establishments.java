@@ -3,18 +3,11 @@ package edu.rose_hulman.cookmn.downtownterrehaute;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * Created by Dev on 02/01/2016.
+ * Created by Dev on 01/18/2016.
  */
-public class Event {
+public class Establishments {
     @JsonIgnore
     private String id;
-
-    private String name;
-    private String date;
-    private String time;
-    private String location;
-    private String description;
-    private String logo;
 
     public String getId() {
         return id;
@@ -32,20 +25,12 @@ public class Event {
         this.name = name;
     }
 
-    public String getDate() {
-        return date;
+    public String getHours() {
+        return hours;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+    public void setHours(String hours) {
+        this.hours = hours;
     }
 
     public String getLocation() {
@@ -71,4 +56,20 @@ public class Event {
     public void setLogo(String logo) {
         this.logo = logo;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String name;
+    private String hours;
+    private String location;
+    private String description;
+    private String logo;
+    private String type;
+
 }
