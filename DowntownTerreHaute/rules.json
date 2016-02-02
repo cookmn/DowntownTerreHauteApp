@@ -1,0 +1,78 @@
+{
+  "rules": {
+    "establishments": {
+      "$establishment": {
+        ".validate": "newData.hasChildren(['name', 'hours', 'location', 'description', 'logo', 'type'])",
+        "name": {
+          ".validate": "newData.isString()"
+        },
+        "hours": {
+          ".validate": "newData.isString()"
+        },
+        "location": {
+          ".validate": "newData.isString()"
+        },
+        "description": {
+          ".validate": "newData.isString()"
+        },
+        "logo": {
+          ".validate": "newData.isString()"
+        },
+        "type": {
+          ".validate": "newData.isString()"
+        },
+        "$other": {
+          ".validate": "false"
+        }
+      }
+    },
+    "events": {
+      "$event": {
+        ".validate": "newData.hasChildren(['name', 'date', 'time', 'location', 'description', 'logo'])",
+        "name": {
+          ".validate": "newData.isString()"
+        },
+        "date": {
+          ".validate": "newData.isNumber()"
+        },
+        "time": {
+          ".validate": "newData.isString()"
+        },
+        "location": {
+          ".validate": "newData.isString()"
+        },
+        "description": {
+          ".validate": "newData.isString()"
+        },
+        "logo": {
+          ".validate": "newData.isString()"
+        },
+        "$other": {
+          ".validate": "false"
+        }
+      }
+    },
+    "statuses": {
+      "$status": {
+        ".validate": "newData.hasChildren(['text', 'user', 'numLikes', 'flagged'])",
+        "text": {
+          ".validate": "newData.isString()"
+        },
+        "user": {
+          ".validate": "newData.isString()"
+        },
+        "numLikes": {
+          ".validate": "newData.isNumber()"
+        },
+        "flagged": {
+          ".validate": "newData.isNumber()"
+        },
+        "$other": {
+          ".validate": "false"
+        }
+      }
+    },
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
