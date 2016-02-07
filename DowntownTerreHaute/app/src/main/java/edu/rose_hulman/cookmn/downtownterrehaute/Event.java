@@ -25,6 +25,10 @@ public class Event {
         this.logo = logo;
     }
 
+    public Event(){
+        //Empty for firebase
+    }
+
     public String getId() {
         return id;
     }
@@ -79,5 +83,14 @@ public class Event {
 
     public void setLogo(String logo) {
         this.logo = logo;
+    }
+
+    public void setValues(Event event) {
+        this.name = event.getName();
+        this.date = event.getDate();
+        this.time = event.getTime();
+        this.location = event.getLocation();
+        this.description = event.getDescription();
+        this.logo = event.getLogo();
     }
 }

@@ -2,12 +2,16 @@ package edu.rose_hulman.cookmn.downtownterrehaute;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,24 +23,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
     //private final RecyclerView mRecyclerView;
     private Context mContext;
     private List<Event> mEvents;
-    private static final String FIREBASE_REPO = "downtown-terre-haute";
-    private static final String FIREBASE_URL = "https://" + FIREBASE_REPO + ".firebaseio.com";
-    private static final String QUOTES_PATH = FIREBASE_URL + "/events";
     private Firebase eventRef;
 
-    public EventAdapter(Context context, RecyclerView recyclerView) {
+    public EventAdapter(Callback callback, Context context) {
         mContext = context;
-        //mRecyclerView = recyclerView;
         mEvents = new ArrayList<>();
-        Firebase.setAndroidContext(context);
-        Firebase.getDefaultConfig().setPersistenceEnabled(true);
-
+        eventRef = new Firebase(MainActivity.EVENTS_PATH);
+        eventRef.addChildEventListener(new EventChildEventListener());
     }
-
-    public EventAdapter() {
-        //Need this line for the firebase
-    }
-
 
     @Override
     public int getItemCount() {
@@ -52,27 +46,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-//        holder.nameView.setText(mFoods.get(position).getName());
-//        holder.imageView.setImageResource(mFoods.get(position).getResource());
-//        holder.ratingBar.setRating(mFoods.get(position).getRating());
-//        holder.ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-//            @Override
-//            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-//                if (fromUser) {
-//                    mFoods.get(position).setRating(ratingBar.getRating());
-//                }
-//            }
-//        });
-//
-//        holder.nameView.setOnLongClickListener(new View.OnLongClickListener() {
-//
-//            @Override
-//            public boolean onLongClick(View v) {
-//                removeItem(position);
-//                return true;
-//            }
-//        });
-
+        holder.nameView.setText(mEvents.get(position).getName());
 
     }
 
@@ -80,18 +54,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
         eventRef.push().setValue(event);
     }
 
-
-
-    public void addItem(){
-
-
-    }
-
-    public void removeItem(int position) {
-        this.notifyDataSetChanged();
-        mEvents.remove(position);
-        this.notifyItemRemoved(position);
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView nameView;
@@ -105,4 +67,52 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
         }
     }
 
+    public interface Callback {
+        void seeDetails(Event event);
+    }
+
+    private class EventChildEventListener implements ChildEventListener {
+        @Override
+        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            Event event = dataSnapshot.getValue(Event.class);
+            event.setId(dataSnapshot.getKey());
+            mEvents.add(0, event);
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            String key = dataSnapshot.getKey();
+            Event event = dataSnapshot.getValue(Event.class);
+            for(Event wp: mEvents){
+                if(key.equals(wp.getId())){
+                    wp.setValues(event);
+                    notifyDataSetChanged();
+                    return;
+                }
+            }
+        }
+
+        @Override
+        public void onChildRemoved(DataSnapshot dataSnapshot) {
+            String key = dataSnapshot.getKey();
+            for(Event wp: mEvents){
+                if(key.equals(wp.getId())){
+                    mEvents.remove(wp);
+                    notifyDataSetChanged();
+                    return;
+                }
+            }
+        }
+
+        @Override
+        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onCancelled(FirebaseError firebaseError) {
+            Log.e("Events", firebaseError.getMessage());
+        }
+    }
 }

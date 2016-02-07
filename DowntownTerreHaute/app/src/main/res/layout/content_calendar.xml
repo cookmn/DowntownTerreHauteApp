@@ -18,15 +18,15 @@
         android:text="@string/calendar_of_events_text"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textSize="34dp"
+        android:textSize="24dp"
         android:layout_marginTop="10dp"
         android:textAlignment="center"
         android:id="@+id/textView" />
 
-    <CalendarView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/calendarView"
+        android:id="@+id/recycler_view"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/textView"/>
