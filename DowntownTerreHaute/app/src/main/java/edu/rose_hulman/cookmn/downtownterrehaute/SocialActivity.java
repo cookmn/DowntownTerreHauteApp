@@ -3,16 +3,24 @@ package edu.rose_hulman.cookmn.downtownterrehaute;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.firebase.client.Firebase;
 
-public class SocialActivity extends AppCompatActivity {
+public class SocialActivity extends AppCompatActivity implements StatusAdapter.Callback {
+
+    private edu.rose_hulman.cookmn.downtownterrehaute.StatusAdapter mAdapter;
     public static final String FIREBASE_REPO = "downtown-terre-haute";
     public static final String FIREBASE_URL = "https://" + FIREBASE_REPO + ".firebaseio.com";
     public static final String STATUSES_PATH = FIREBASE_URL + "/statuses";
@@ -33,10 +41,47 @@ public class SocialActivity extends AppCompatActivity {
                 openStatusPostDialog();
             }
         });
+
+        mAdapter = new edu.rose_hulman.cookmn.downtownterrehaute.StatusAdapter(this, this);
+        RecyclerView view = (RecyclerView) findViewById(R.id.recycler_view);
+        view.setLayoutManager(new LinearLayoutManager(this));
+        view.setHasFixedSize(true);
+        view.setAdapter(mAdapter);
     }
 
     private void openStatusPostDialog() {
-        LayoutInflater inflater = getLayoutInflater();
+        DialogFragment df = new DialogFragment() {
+            @Override
+            public Dialog onCreateDialog(Bundle savedInstanceState) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle(R.string.dialog_add_title);
+                View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_post_status, null, false);
+                builder.setView(view);
+                final EditText editText = (EditText) view.findViewById(R.id.service);
+
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mAdapter.firebasePush(new Status(editText.getText().toString(), "user", 0, false));
+                    }
+                });
+                builder.setNegativeButton(android.R.string.cancel, null);
+
+                return builder.create();
+            }
+        };
+        df.show(getSupportFragmentManager(), "firebasePush");
+
+
+
+
+
+
+
+
+
+
+       /* LayoutInflater inflater = getLayoutInflater();
         View contentView = inflater.inflate(R.layout.dialog_post_status, null);
         final Dialog dialog = new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.post_a_status))
@@ -49,7 +94,7 @@ public class SocialActivity extends AppCompatActivity {
                     }
                 })
                 .create();
-            dialog.show();
+            dialog.show();*/
 
     }
 
@@ -58,4 +103,8 @@ public class SocialActivity extends AppCompatActivity {
         establishmentRef.push().setValue(status);
     }
 
+    @Override
+    public void onEdit(final Status status) {
+        openStatusPostDialog();
+    }
 }

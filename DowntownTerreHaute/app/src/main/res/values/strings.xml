@@ -27,4 +27,5 @@
     <string name="title_activity_establishment_information">EstablishmentInformationActivity
     </string>
     <string name="establishment_information">Establishment Information</string>
+    <string name="dialog_add_title" />
 </resources>

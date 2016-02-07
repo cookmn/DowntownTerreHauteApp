@@ -30,6 +30,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/textView"/>
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_below="@+id/status_post_button">
