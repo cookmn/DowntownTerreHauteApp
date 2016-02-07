@@ -64,7 +64,12 @@ public class Status {
         this.flagged = flagged;
     }
 
-
+    public void setValues(Status status) {
+        text = status.getText();
+        user = status.getUser();
+        numLikes = status.getNumLikes();
+        flagged = status.getFlagged();
+    }
 
 
 }

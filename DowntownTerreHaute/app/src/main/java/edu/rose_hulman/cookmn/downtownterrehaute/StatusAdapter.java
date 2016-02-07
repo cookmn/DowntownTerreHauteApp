@@ -50,7 +50,15 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
 
         @Override
         public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            //Do not need to implement this
+            String key = dataSnapshot.getKey();
+            Status status = dataSnapshot.getValue(Status.class);
+            for(Status st : statuses) {
+                if (st.getKey().equals(key)) {
+                    st.setValues(status);
+                    notifyItemChanged(statuses.indexOf(st));
+                    break;
+                }
+            }
         }
 
         @Override
