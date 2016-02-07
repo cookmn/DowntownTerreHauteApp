@@ -1,6 +1,7 @@
 package edu.rose_hulman.cookmn.downtownterrehaute;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,13 +14,16 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Dev on 12/14/2015.
  */
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
+    private final Callback mCallback;
     //private final RecyclerView mRecyclerView;
     private Context mContext;
     private List<Event> mEvents;
@@ -27,6 +31,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
 
     public EventAdapter(Callback callback, Context context) {
         mContext = context;
+        mCallback = callback;
         mEvents = new ArrayList<>();
         eventRef = new Firebase(MainActivity.EVENTS_PATH);
         eventRef.addChildEventListener(new EventChildEventListener());
@@ -47,6 +52,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.nameView.setText(mEvents.get(position).getName());
+        SimpleDateFormat f = new SimpleDateFormat("EEE, MMM d");
+        Date date = new Date(mEvents.get(position).getDate());
+        holder.timeView.setText(f.format(date) +" @ " + mEvents.get(position).getTime());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCallback.seeDetails(mEvents.get(position));
+            }
+        });
+
 
     }
 
@@ -58,12 +73,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView nameView;
         private TextView timeView;
+        private CardView cardView;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
             nameView = (TextView) itemView.findViewById(R.id.name_view);
             timeView = (TextView) itemView.findViewById(R.id.time_view);
+            cardView = (CardView) itemView.findViewById(R.id.card_view);
         }
     }
 
