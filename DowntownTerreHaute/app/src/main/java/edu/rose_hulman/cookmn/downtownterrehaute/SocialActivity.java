@@ -10,7 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
+import com.firebase.client.Firebase;
+
 public class SocialActivity extends AppCompatActivity {
+    public static final String FIREBASE_REPO = "downtown-terre-haute";
+    public static final String FIREBASE_URL = "https://" + FIREBASE_REPO + ".firebaseio.com";
+    public static final String STATUSES_PATH = FIREBASE_URL + "/statuses";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +45,17 @@ public class SocialActivity extends AppCompatActivity {
                 .setPositiveButton("Post", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        firebasePushStatus(new Status("data", "data2", 10, false));
                     }
                 })
                 .create();
             dialog.show();
 
+    }
+
+    public void firebasePushStatus(Status status) {
+        Firebase establishmentRef = new Firebase(STATUSES_PATH);
+        establishmentRef.push().setValue(status);
     }
 
 }

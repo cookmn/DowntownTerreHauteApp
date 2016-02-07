@@ -15,32 +15,32 @@ import java.util.List;
 /**
  * Created by Dev on 12/14/2015.
  */
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
+public class EstablishmentAdapter extends RecyclerView.Adapter<EstablishmentAdapter.ViewHolder> {
     //private final RecyclerView mRecyclerView;
     private Context mContext;
-    private List<Event> mEvents;
+    private List<Establishment> mEstablishments;
     private static final String FIREBASE_REPO = "downtown-terre-haute";
     private static final String FIREBASE_URL = "https://" + FIREBASE_REPO + ".firebaseio.com";
-    private static final String QUOTES_PATH = FIREBASE_URL + "/events";
-    private Firebase eventRef;
+    private static final String QUOTES_PATH = FIREBASE_URL + "/establishments";
+    private Firebase establishmentRef;
 
-    public EventAdapter(Context context, RecyclerView recyclerView) {
+    public EstablishmentAdapter(Context context, RecyclerView recyclerView) {
         mContext = context;
         //mRecyclerView = recyclerView;
-        mEvents = new ArrayList<>();
+        mEstablishments = new ArrayList<>();
         Firebase.setAndroidContext(context);
         Firebase.getDefaultConfig().setPersistenceEnabled(true);
 
     }
 
-    public EventAdapter() {
+    public EstablishmentAdapter() {
         //Need this line for the firebase
     }
 
 
     @Override
     public int getItemCount() {
-        return mEvents.size();
+        return mEstablishments.size();
     }
 
 
@@ -76,8 +76,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
 
     }
 
-    public void firebasePush(Event event) {
-        eventRef.push().setValue(event);
+    public void firebasePush(Establishment establishment) {
+        establishmentRef.push().setValue(establishment);
     }
 
 
@@ -89,7 +89,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
 
     public void removeItem(int position) {
         this.notifyDataSetChanged();
-        mEvents.remove(position);
+        mEstablishments.remove(position);
         this.notifyItemRemoved(position);
     }
 

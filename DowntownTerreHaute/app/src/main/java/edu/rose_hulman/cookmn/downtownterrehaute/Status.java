@@ -6,9 +6,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * Created by Dev on 02/01/2016.
  */
 public class Status {
+    private String text;
+    private String user;
+    private Number numLikes;
+    private boolean flagged;
 
     //Default constructor for Firebase
     public Status(){}
+
+    public Status(String text, String user, Number numLikes, boolean flagged){
+        this.text = text;
+        this.user = user;
+        this.numLikes = numLikes;
+        this.flagged = flagged;
+    }
 
     @JsonIgnore
     private String key;
@@ -45,18 +56,15 @@ public class Status {
         this.user = user;
     }
 
-    public Number getFlagged() {
+    public boolean getFlagged() {
         return flagged;
     }
 
-    public void setFlagged(Number flagged) {
+    public void setFlagged(boolean flagged) {
         this.flagged = flagged;
     }
 
-    private String text;
-    private String user;
-    private Number numLikes;
-    private Number flagged;
+
 
 
 }

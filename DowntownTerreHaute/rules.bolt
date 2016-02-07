@@ -26,7 +26,7 @@ type Status {
 	flagged: Number
 }
 
-path /establishments/{establishment} is Establishment;
+path /establishment/{establishment} is Establishment;
 path /events/{event} is Event;
 path /statuses/{status} is Status;
 

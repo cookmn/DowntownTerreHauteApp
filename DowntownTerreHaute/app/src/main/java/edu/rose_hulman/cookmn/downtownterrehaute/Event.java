@@ -10,11 +10,20 @@ public class Event {
     private String id;
 
     private String name;
-    private String date;
+    private long date;
     private String time;
     private String location;
     private String description;
     private String logo;
+
+    public Event(String name, long date, String time, String location, String description, String logo){
+        this.name = name;
+        this.date = date;
+        this.time = time;
+        this.location = location;
+        this.description = description;
+        this.logo = logo;
+    }
 
     public String getId() {
         return id;
@@ -32,11 +41,11 @@ public class Event {
         this.name = name;
     }
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(long date) {
         this.date = date;
     }
 

@@ -5,9 +5,22 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * Created by Dev on 01/18/2016.
  */
-public class Establishments {
+public class Establishment {
     @JsonIgnore
     private String id;
+
+    public Establishment(String name, String hours, String location, String description, String logo, String type) {
+        this.name = name;
+        this.hours = hours;
+        this.location = location;
+        this.description = description;
+        this.logo = logo;
+        this.type = type;
+    }
+
+    public Establishment() {
+        //Need this for firebase
+    }
 
     public String getId() {
         return id;
