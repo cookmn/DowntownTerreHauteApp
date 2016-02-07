@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.rose_hulman.cookmn.downtownterrehaute">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -54,6 +55,24 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.rose_hulman.cookmn.downtownterrehaute.MainActivity" />
+        </activity>
+        <activity
+            android:name=".SearchResultsActivity"
+            android:label="@string/title_activity_search_results"
+            android:parentActivityName=".SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.rose_hulman.cookmn.downtownterrehaute.SearchActivity" />
+        </activity>
+        <activity
+            android:name=".EstablishmentInformationActivity"
+            android:label="@string/title_activity_establishment_information"
+            android:parentActivityName=".SearchResultsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.rose_hulman.cookmn.downtownterrehaute.SearchResultsActivity" />
         </activity>
     </application>
 

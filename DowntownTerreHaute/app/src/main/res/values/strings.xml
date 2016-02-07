@@ -23,4 +23,8 @@
     <string name="postStatus">Post a status</string>
     <string name="title_activity_calender_list_tab_host">CalenderListTabHost</string>
     <string name="post_a_status">Post a status</string>
+    <string name="title_activity_search_results">SearchResultsActivity</string>
+    <string name="title_activity_establishment_information">EstablishmentInformationActivity
+    </string>
+    <string name="establishment_information">Establishment Information</string>
 </resources>

@@ -85,4 +85,12 @@ public class Establishment {
     private String logo;
     private String type;
 
+    public void setValues(Establishment establishment) {
+        name = establishment.getName();
+        hours = establishment.getHours();
+        location = establishment.getLocation();
+        description = establishment.getDescription();
+        logo = establishment.getLogo();
+        type = establishment.getType();
+    }
 }
