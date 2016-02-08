@@ -1,4 +1,4 @@
-package edu.rose_hulman.cookmn.downtownterrehaute;
+package edu.rose_hulman.cookmn.downtownterrehaute.Activities;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -9,18 +9,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.firebase.client.Firebase;
 
-public class SocialActivity extends AppCompatActivity implements StatusAdapter.Callback {
+import edu.rose_hulman.cookmn.downtownterrehaute.Adapters.StatusAdapter;
+import edu.rose_hulman.cookmn.downtownterrehaute.ModelObjects.Status;
+import edu.rose_hulman.cookmn.downtownterrehaute.R;
 
-    private edu.rose_hulman.cookmn.downtownterrehaute.StatusAdapter mAdapter;
+public class StatusActivity extends AppCompatActivity implements StatusAdapter.Callback {
+
+    private StatusAdapter mAdapter;
     public static final String FIREBASE_REPO = "downtown-terre-haute";
     public static final String FIREBASE_URL = "https://" + FIREBASE_REPO + ".firebaseio.com";
     public static final String STATUSES_PATH = FIREBASE_URL + "/statuses";
@@ -42,7 +43,7 @@ public class SocialActivity extends AppCompatActivity implements StatusAdapter.C
             }
         });
 
-        mAdapter = new edu.rose_hulman.cookmn.downtownterrehaute.StatusAdapter(this, this);
+        mAdapter = new StatusAdapter(this, this);
         RecyclerView view = (RecyclerView) findViewById(R.id.recycler_view);
         view.setLayoutManager(new LinearLayoutManager(this));
         view.setAdapter(mAdapter);

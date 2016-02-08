@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="edu.rose_hulman.cookmn.downtownterrehaute.EstablishmentInformationActivity"
+    tools:context=".Activities.EstablishmentInformationActivity"
     tools:showIn="@layout/activity_establishment_information"
     android:orientation="vertical">
 
@@ -17,8 +17,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/establishment_information"
-        android:textSize="34dp"
-        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="35dp"
+        android:layout_marginTop="25dp"
         android:textAlignment="center"
         android:id="@+id/establishment_name" />
 
@@ -29,10 +30,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginTop="35dp"
             android:text="Hours: "/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginTop="35dp"
             android:id="@+id/establishment_hours"/>
 
     </LinearLayout>
@@ -43,10 +48,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginTop="37dp"
             android:text="Location: "/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginTop="37dp"
             android:id="@+id/establishment_location"/>
 
     </LinearLayout>
@@ -57,10 +66,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginTop="39dp"
             android:text="Description: "/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginTop="39dp"
             android:id="@+id/establishment_desc"/>
 
     </LinearLayout>

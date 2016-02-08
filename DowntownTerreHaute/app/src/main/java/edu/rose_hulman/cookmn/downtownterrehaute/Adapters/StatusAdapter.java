@@ -1,4 +1,4 @@
-package edu.rose_hulman.cookmn.downtownterrehaute;
+package edu.rose_hulman.cookmn.downtownterrehaute.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -16,6 +16,9 @@ import com.firebase.client.FirebaseError;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.rose_hulman.cookmn.downtownterrehaute.R;
+import edu.rose_hulman.cookmn.downtownterrehaute.ModelObjects.Status;
 
 /**
  * Created by cookmn on 2/7/2016.

@@ -1,4 +1,4 @@
-package edu.rose_hulman.cookmn.downtownterrehaute;
+package edu.rose_hulman.cookmn.downtownterrehaute.ModelObjects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

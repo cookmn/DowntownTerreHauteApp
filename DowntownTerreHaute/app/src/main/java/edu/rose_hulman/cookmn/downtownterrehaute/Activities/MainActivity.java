@@ -1,4 +1,4 @@
-package edu.rose_hulman.cookmn.downtownterrehaute;
+package edu.rose_hulman.cookmn.downtownterrehaute.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,10 @@ import com.firebase.client.Firebase;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import edu.rose_hulman.cookmn.downtownterrehaute.ModelObjects.Establishment;
+import edu.rose_hulman.cookmn.downtownterrehaute.ModelObjects.Event;
+import edu.rose_hulman.cookmn.downtownterrehaute.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -84,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(infoIntent);
 
         }else if(v.getId() == R.id.share_button){
-            Intent infoIntent = new Intent(this, SocialActivity.class);
+            Intent infoIntent = new Intent(this, StatusActivity.class);
             startActivity(infoIntent);
         }
     }

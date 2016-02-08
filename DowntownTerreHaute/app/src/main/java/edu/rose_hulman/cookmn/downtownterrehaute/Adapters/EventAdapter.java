@@ -1,4 +1,4 @@
-package edu.rose_hulman.cookmn.downtownterrehaute;
+package edu.rose_hulman.cookmn.downtownterrehaute.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -13,91 +13,101 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.Query;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import edu.rose_hulman.cookmn.downtownterrehaute.ModelObjects.Event;
+import edu.rose_hulman.cookmn.downtownterrehaute.Activities.MainActivity;
+import edu.rose_hulman.cookmn.downtownterrehaute.R;
 
 /**
  * Created by Dev on 12/14/2015.
  */
-public class EstablishmentAdapter extends RecyclerView.Adapter<EstablishmentAdapter.ViewHolder> {
+public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
+    private final Callback mCallback;
     //private final RecyclerView mRecyclerView;
     private Context mContext;
-    private Callback mCallback;
-    private List<Establishment> mEstablishments;
-    private Firebase establishmentRef;
+    private List<Event> mEvents;
+    private Firebase eventRef;
 
-    public EstablishmentAdapter(Callback callback, Context context, String type) {
+    public EventAdapter(Callback callback, Context context) {
         mContext = context;
         mCallback = callback;
-        mEstablishments = new ArrayList<>();
-        Firebase firebase = new Firebase(MainActivity.ESTABLISHMENTS_PATH);
-        ChildEventListener childEventListener = new EstablishmentChildEventListener();
-        Query query = firebase.orderByChild("type").equalTo(type);
-        query.addChildEventListener(childEventListener);
-
+        mEvents = new ArrayList<>();
+        eventRef = new Firebase(MainActivity.EVENTS_PATH);
+        eventRef.addChildEventListener(new EventChildEventListener());
     }
-
 
     @Override
     public int getItemCount() {
-        return mEstablishments.size();
+        return mEvents.size();
     }
 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.establishment_list_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_list_view, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.nameView.setText(mEstablishments.get(position).getName());
+        holder.nameView.setText(mEvents.get(position).getName());
+        SimpleDateFormat f = new SimpleDateFormat("EEE, MMM d");
+        Date date = new Date(mEvents.get(position).getDate());
+        holder.timeView.setText(f.format(date) +" @ " + mEvents.get(position).getTime());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCallback.seeDetails(mEstablishments.get(position));
+                mCallback.seeDetails(mEvents.get(position));
             }
         });
 
 
     }
 
+    public void firebasePush(Event event) {
+        eventRef.push().setValue(event);
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView nameView;
+        private TextView timeView;
         private CardView cardView;
 
 
-        public ViewHolder(View view) {
-            super(view);
-            nameView = (TextView) view.findViewById(R.id.name_view);
+        public ViewHolder(View itemView) {
+            super(itemView);
+            nameView = (TextView) itemView.findViewById(R.id.name_view);
+            timeView = (TextView) itemView.findViewById(R.id.time_view);
             cardView = (CardView) itemView.findViewById(R.id.card_view);
         }
     }
 
     public interface Callback {
-        void seeDetails(Establishment establishment);
+        void seeDetails(Event event);
     }
 
-    private class EstablishmentChildEventListener implements ChildEventListener {
+    private class EventChildEventListener implements ChildEventListener {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-            Establishment establishment = dataSnapshot.getValue(Establishment.class);
-            establishment.setId(dataSnapshot.getKey());
-            mEstablishments.add(0, establishment);
+            Event event = dataSnapshot.getValue(Event.class);
+            event.setId(dataSnapshot.getKey());
+            mEvents.add(0, event);
             notifyDataSetChanged();
         }
 
         @Override
         public void onChildChanged(DataSnapshot dataSnapshot, String s) {
             String key = dataSnapshot.getKey();
-            Establishment establishment = dataSnapshot.getValue(Establishment.class);
-            for(Establishment wp: mEstablishments){
+            Event event = dataSnapshot.getValue(Event.class);
+            for(Event wp: mEvents){
                 if(key.equals(wp.getId())){
-                    wp.setValues(establishment);
+                    wp.setValues(event);
                     notifyDataSetChanged();
                     return;
                 }
@@ -107,9 +117,9 @@ public class EstablishmentAdapter extends RecyclerView.Adapter<EstablishmentAdap
         @Override
         public void onChildRemoved(DataSnapshot dataSnapshot) {
             String key = dataSnapshot.getKey();
-            for(Establishment wp: mEstablishments){
+            for(Event wp: mEvents){
                 if(key.equals(wp.getId())){
-                    mEstablishments.remove(wp);
+                    mEvents.remove(wp);
                     notifyDataSetChanged();
                     return;
                 }
@@ -123,7 +133,7 @@ public class EstablishmentAdapter extends RecyclerView.Adapter<EstablishmentAdap
 
         @Override
         public void onCancelled(FirebaseError firebaseError) {
-            Log.e("Establishments", firebaseError.getMessage());
+            Log.e("Events", firebaseError.getMessage());
         }
     }
 }
