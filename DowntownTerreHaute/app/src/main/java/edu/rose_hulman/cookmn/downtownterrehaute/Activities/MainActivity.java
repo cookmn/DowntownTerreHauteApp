@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         long milliseconds = d.getTime();
         //firebasePushEvent(new Event("The Valentines Parade", milliseconds, "10AM-11AM", "The intersection of Wabash & 7th St.", "The Valentines Parade is a parade that showcases love", "logo"));
-        //firebasePushEstablishment(new Establishment("Chuck's Comics", "12PM-6PM", "7 South 6th St., Terre Haute, IN 47807", "Chuck's Comics is a comic book store", "logo", "shop"));
-    }
+        //firebasePushEstablishment(new Establishment("Boo's Crossroads Cafe", "8AM-4PM", " 679 Wabash Ave, Terre Haute, IN 47807", "Boo's Crossroads is a bakery and breakfast favorite", "logo", "restaurant"));
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
