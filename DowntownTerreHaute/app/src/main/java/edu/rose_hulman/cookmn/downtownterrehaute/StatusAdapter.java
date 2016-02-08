@@ -1,6 +1,7 @@
 package edu.rose_hulman.cookmn.downtownterrehaute;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -87,27 +88,20 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.status_row_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.status_list_view, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final Status status = statuses.get(position);
-        holder.statusTextView.setText(status.getText());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.nameView.setText(statuses.get(position).getText());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCallback.onEdit(status);
+                mCallback.seeDetails(statuses.get(position));
             }
         });
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return true;
-            }
-        });
 
     }
 
@@ -121,15 +115,18 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
     }
 
     public interface Callback {
-        public void onEdit(Status status);
+        void seeDetails(Status status);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView statusTextView;
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        private TextView nameView;
+        private CardView cardView;
 
-        public ViewHolder(View itemView) {
-            super(itemView);
-            statusTextView = (TextView) itemView.findViewById(R.id.quote_text);
+
+        public ViewHolder(View view) {
+            super(view);
+            nameView = (TextView) view.findViewById(R.id.name_view);
+            cardView = (CardView) itemView.findViewById(R.id.card_view);
         }
     }
 }

@@ -45,7 +45,6 @@ public class SocialActivity extends AppCompatActivity implements StatusAdapter.C
         mAdapter = new edu.rose_hulman.cookmn.downtownterrehaute.StatusAdapter(this, this);
         RecyclerView view = (RecyclerView) findViewById(R.id.recycler_view);
         view.setLayoutManager(new LinearLayoutManager(this));
-        view.setHasFixedSize(true);
         view.setAdapter(mAdapter);
     }
 
@@ -104,7 +103,7 @@ public class SocialActivity extends AppCompatActivity implements StatusAdapter.C
     }
 
     @Override
-    public void onEdit(final Status status) {
-        openStatusPostDialog();
+    public void seeDetails(Status status) {
+
     }
 }
