@@ -1,13 +1,15 @@
 package edu.rose_hulman.cookmn.downtownterrehaute.Adapters;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -24,6 +26,7 @@ import edu.rose_hulman.cookmn.downtownterrehaute.ModelObjects.Status;
  * Created by cookmn on 2/7/2016.
  */
 public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder> {
+    private Context mContext;
     private List<Status> statuses;
     private Callback mCallback;
 
@@ -36,11 +39,10 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
         mCallback = callback;
         statuses = new ArrayList<>();
         //you need this line to use Firebase
-        Firebase.setAndroidContext(context);
-        Firebase.getDefaultConfig().setPersistenceEnabled(true);
         statusRef = new Firebase(QUOTES_PATH);
         statusRef.keepSynced(true);
         statusRef.addChildEventListener(new MovieQuoteChildEventListener());
+        mContext = context;
     }
 
     private class MovieQuoteChildEventListener implements ChildEventListener {
@@ -98,14 +100,24 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.nameView.setText(statuses.get(position).getText());
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.likesView.setText(statuses.get(position).getNumLikes() + " likes");
+        holder.likesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCallback.seeDetails(statuses.get(position));
+                Status status = statuses.get(position);
+                status.setNumLikes((int) status.getNumLikes() + 1);
+                statusRef.child(statuses.get(position).getKey()).setValue(status);
             }
         });
-
-
+        holder.flagButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Status status = statuses.get(position);
+                status.setFlagged(true);
+                statusRef.child(statuses.get(position).getKey()).setValue(status);
+                Toast.makeText(mContext, "Flagged", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void firebasePush(Status status) {
@@ -122,14 +134,18 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        private ImageButton flagButton;
+        private ImageButton likesButton;
         private TextView nameView;
-        private CardView cardView;
+        private TextView likesView;
 
 
         public ViewHolder(View view) {
             super(view);
             nameView = (TextView) view.findViewById(R.id.name_view);
-            cardView = (CardView) itemView.findViewById(R.id.card_view);
+            likesView = (TextView) view.findViewById(R.id.likes_count_view);
+            likesButton = (ImageButton) view.findViewById(R.id.likeButton);
+            flagButton = (ImageButton) view.findViewById(R.id.flagButton);
         }
     }
 }

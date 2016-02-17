@@ -1,6 +1,7 @@
 package edu.rose_hulman.cookmn.downtownterrehaute.Adapters;
 
 import android.content.Context;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +14,7 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ import edu.rose_hulman.cookmn.downtownterrehaute.R;
  */
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
     private final Callback mCallback;
+    private final Query eventRefQuery;
     //private final RecyclerView mRecyclerView;
     private Context mContext;
     private List<Event> mEvents;
@@ -38,7 +41,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
         mCallback = callback;
         mEvents = new ArrayList<>();
         eventRef = new Firebase(MainActivity.EVENTS_PATH);
-        eventRef.addChildEventListener(new EventChildEventListener());
+        eventRefQuery = eventRef.orderByChild("date");
+        eventRefQuery.addChildEventListener(new EventChildEventListener());
     }
 
     @Override
@@ -69,6 +73,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
 
     }
 
+
+
     public void firebasePush(Event event) {
         eventRef.push().setValue(event);
     }
@@ -91,6 +97,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
     public interface Callback {
         void seeDetails(Event event);
     }
+
 
     private class EventChildEventListener implements ChildEventListener {
         @Override

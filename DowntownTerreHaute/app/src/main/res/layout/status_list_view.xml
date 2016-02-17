@@ -16,7 +16,6 @@
                 android:id="@+id/name_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:width="215dp"
                 android:textSize="28sp"
                 android:layout_alignParentLeft="true"
                 android:text="New Text"/>
@@ -24,25 +23,26 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true">
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/name_view">
 
                 <TextView
                     android:id="@+id/likes_count_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="28sp"
-                    android:text="0"/>
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/flagButton"
-                    android:src="@android:drawable/ic_menu_myplaces"/>
+                    android:text="0 likes"/>
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/likeButton"
+                    android:src="@android:drawable/star_big_off"/>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/flagButton"
                     android:src="@android:drawable/ic_menu_myplaces"/>
             </LinearLayout>
 

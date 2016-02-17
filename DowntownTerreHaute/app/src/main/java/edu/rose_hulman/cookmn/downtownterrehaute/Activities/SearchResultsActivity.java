@@ -2,10 +2,12 @@ package edu.rose_hulman.cookmn.downtownterrehaute.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import edu.rose_hulman.cookmn.downtownterrehaute.Adapters.EstablishmentAdapter;
 import edu.rose_hulman.cookmn.downtownterrehaute.ModelObjects.Establishment;

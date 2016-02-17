@@ -1,6 +1,7 @@
 package edu.rose_hulman.cookmn.downtownterrehaute.Adapters;
 
 import android.content.Context;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,6 +17,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import edu.rose_hulman.cookmn.downtownterrehaute.ModelObjects.Establishment;
@@ -36,11 +38,10 @@ public class EstablishmentAdapter extends RecyclerView.Adapter<EstablishmentAdap
         mContext = context;
         mCallback = callback;
         mEstablishments = new ArrayList<>();
-        Firebase firebase = new Firebase(MainActivity.ESTABLISHMENTS_PATH);
+        establishmentRef  = new Firebase(MainActivity.ESTABLISHMENTS_PATH);
         ChildEventListener childEventListener = new EstablishmentChildEventListener();
-        Query query = firebase.orderByChild("type").equalTo(type);
+        Query query = establishmentRef.orderByChild("type").equalTo(type);
         query.addChildEventListener(childEventListener);
-
     }
 
 
@@ -68,7 +69,6 @@ public class EstablishmentAdapter extends RecyclerView.Adapter<EstablishmentAdap
 
 
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView nameView;
